@@ -11,10 +11,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0, btnC, btnequal, btnsum;
+    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0, btnC, btnequal, btnsum, btnmul, btnres, btndiv;
     private TextView TextoSecuencia;
     private double valor = 0;
-    private double valor2 = 0;
+    /*private double valor2 = 0;*/
     private double resultado = 0;
     private StringBuilder secuencia = new StringBuilder();
 
@@ -36,9 +36,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn8 = findViewById(R.id.btn8);
         btn9 = findViewById(R.id.btn9);
 
+        btndiv = findViewById(R.id.btndiv);
         btnsum = findViewById(R.id.btnsum);
         btnequal = findViewById(R.id.btnigual);
-
+        btnres = findViewById(R.id.btnres);
+        btnmul = findViewById(R.id.btnmul);
 
         btnC.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +129,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 try {
                     valor = Double.parseDouble(secuencia2);
                     secuencia.setLength(0);
-                    resultado += valor + valor2;
+                    resultado += valor;
+
+                    TextoSecuencia.setText("");
+                    Toast.makeText(getApplicationContext(), "Número entero: " + valor, Toast.LENGTH_SHORT).show();
+
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getApplicationContext(), "Secuencia no válida", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        btnmul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String secuencia2 = secuencia.toString();
+
+                try {
+                    valor = Double.parseDouble(secuencia2);
+                    secuencia.setLength(0);
+                    resultado =  resultado * valor;
 
                     TextoSecuencia.setText("");
                     Toast.makeText(getApplicationContext(), "Número entero: " + valor, Toast.LENGTH_SHORT).show();
@@ -143,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String secuencia2 = secuencia.toString();
                 valor = Double.parseDouble(secuencia2);
                 secuencia.setLength(0);
-                resultado += valor + valor2;
+                resultado += valor;
                 TextoSecuencia.setText(Double.toString(resultado));
             }
         });
